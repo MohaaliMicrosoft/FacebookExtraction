@@ -68,6 +68,7 @@ public class MainLogic
                 errorRow["Error"] = page + e.Message;
                 errorRow["Posts"] = JToken.FromObject(posts).ToString();
                 errorDataTable.Rows.Add(errorRow);
+                throw e;
             }
 
              SqlUtility.BulkInsert(sqlConn, errorDataTable, schema + "." + "StagingError");
