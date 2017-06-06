@@ -24,8 +24,9 @@ public class MainLogic
         var errorDataTable = DataTableUtility.GetErrorDataTable();
         List<JObject> posts = null;
 
-        foreach(var page in pages)
+        foreach(var pageToSearch in pages)
         {
+            string page = pageToSearch.Replace(" ", "");
             try
             {
                  // Get Facebook Posts
