@@ -9,6 +9,15 @@ using System.Threading.Tasks;
 
 public class FacebookUtility
 {
+    publio static async Task<JObject> GetPage(string page, string accessToken)
+    {
+        string requestUri = $"https://graph.facebook.com/{page}?access_token={accessToken}";
+        HttpClient client = new HttpClient();
+        var response = await client.GetAsync(requestUri);
+        string responseObj = await response.Content.ReadAsStringAsync();
+        return JObject.Parse(responseObj);
+    }
+    
     public static async Task<List<JObject>> GetPostsAsync(string page, string untilDateTime, string accessToken)
     {
         List<JObject> posts = new List<JObject>();
