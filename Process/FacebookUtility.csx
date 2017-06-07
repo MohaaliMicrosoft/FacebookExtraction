@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 public class FacebookUtility
 {
-    publio static async Task<JObject> GetPage(string page, string accessToken)
+    public static async Task<JObject> GetPage(string page, string accessToken)
     {
         string requestUri = $"https://graph.facebook.com/{page}?access_token={accessToken}";
         HttpClient client = new HttpClient();
