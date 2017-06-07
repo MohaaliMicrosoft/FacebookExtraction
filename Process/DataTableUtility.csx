@@ -18,7 +18,9 @@ public class DataTableUtility
         table.Columns.Add("Post Id1", typeof(long));
         table.Columns.Add("Post Id2", typeof(long));
         table.Columns.Add("Original Post Id");
-         table.Columns.Add("Page");
+        table.Columns.Add("Page");
+        table.Columns.Add("PageDisplayName");
+        table.Columns.Add("PageId");
         return table;
     }
 
@@ -50,6 +52,8 @@ public class DataTableUtility
         table.Columns.Add("Total Shares", typeof(int));
         table.Columns.Add("Total Reactions", typeof(int));
         table.Columns.Add("Page");
+        table.Columns.Add("PageDisplayName");
+        table.Columns.Add("PageId");
         table.Columns.Add("Total Comments", typeof(int));
         table.Columns.Add("BulkInsertId", typeof(int));
         return table;
