@@ -22,7 +22,7 @@ public class MainLogic
         string runId = SqlUtility.InsertRunId(sqlConn, schema + ".[StagingInsert]");
         string[] pages = SqlUtility.GetPages(sqlConn, schema);
         var errorDataTable = DataTableUtility.GetErrorDataTable();
-        List<JObject> posts = null;
+        List<JObject> posts = new List<JObject>();
 
         foreach(var pageToSearch in pages)
         {
@@ -64,12 +64,7 @@ public class MainLogic
                 SqlUtility.BulkInsert(sqlConn, hashTagDataTable, schema + "." + "StagingHashTags");
             }
             catch(Exception e)
-            {
-                if(posts = null)
-                {
-                    throw e;
-                }
-                
+            {    
                 DataRow errorRow = errorDataTable.NewRow();
                 errorRow["Date"] = date;
                 errorRow["Error"] = page + e.Message;
