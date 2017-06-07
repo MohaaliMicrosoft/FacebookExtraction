@@ -88,7 +88,10 @@ public class MainLogic
                 string[] split = post["id"].ToString().Split('_');
                 DataRow postRow = postsDataTable.NewRow();
                 postRow["Id1"] = Utility.ConvertToLong(split[0]);
-                postRow["Id2"] = Utility.ConvertToLong(split[1]);
+                if(split.Length > 1)
+                {
+                    postRow["Id2"] = Utility.ConvertToLong(split[1]);
+                }
                 postRow["Original Id"] = post["id"];
                 postRow["Created Date"] = post["created_time"];
                 postRow["Message"] = post["message"];
@@ -114,7 +117,11 @@ public class MainLogic
                     string[] split2 = comment["id"].ToString().Split('_');
                     DataRow commentRow = commentsDataTable.NewRow();
                     commentRow["Id1"] = Utility.ConvertToLong(split2[0]);
-                    commentRow["Id2"] = Utility.ConvertToLong(split2[1]);
+                     if (split2.Length > 1)
+                    {
+                        commentRow["Id2"] = Utility.ConvertToLong(split2[1]);
+                    }
+                    
                     commentRow["Original Id"] = comment["id"];
                     commentRow["Created Date"] = comment["created_time"];
                     commentRow["Message"] = comment["message"];
@@ -137,7 +144,10 @@ public class MainLogic
                 {
                     DataRow reactionsRow = reactionsDataTable.NewRow();
                     reactionsRow["Id1"] = Utility.ConvertToLong(split[0]);
-                    reactionsRow["Id2"] = Utility.ConvertToLong(split[1]);
+                    if (split.Length > 1)
+                    {
+                        reactionsRow["Id2"] = Utility.ConvertToLong(split[1]);
+                    }
                     reactionsRow["Original Id"] = post["id"];
                     reactionsRow["Reaction Type"] = reaction["type"];
                     reactionsRow["From Id"] = Utility.ConvertToLong(reaction["id"]);
