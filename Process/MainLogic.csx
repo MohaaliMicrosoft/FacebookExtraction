@@ -63,6 +63,11 @@ public class MainLogic
             }
             catch(Exception e)
             {
+                if(posts = null)
+                {
+                    throw e;
+                }
+                
                 DataRow errorRow = errorDataTable.NewRow();
                 errorRow["Date"] = date;
                 errorRow["Error"] = page + e.Message;
