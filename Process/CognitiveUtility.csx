@@ -77,7 +77,11 @@ public class CognitiveUtility
                     string[] split = doc["id"].ToString().Split('_');
                     DataRow row = sentiment.NewRow();
                     row["Id1"] = Utility.ConvertToLong(split[0]);
-                    row["Id2"] = Utility.ConvertToLong(split[1]);
+                     if (split.Length > 1)
+                        {
+                            row["Id2"] = Utility.ConvertToLong(split[1]);
+                        }
+                    
                     row["Original Id"] = doc["id"];
                     row["BulkInsertId"] = runId;
                     row["Sentiment"] = double.Parse(doc["score"].ToString());
@@ -111,7 +115,11 @@ public class CognitiveUtility
                         string[] split = doc["id"].ToString().Split('_');
                         DataRow row = keyPhrase.NewRow();
                         row["Id1"] = Utility.ConvertToLong(split[0]);
-                        row["Id2"] = Utility.ConvertToLong(split[1]);
+                         if (split.Length > 1)
+                        {
+                            row["Id2"] = Utility.ConvertToLong(split[1]);
+                        }
+                       
                         row["Original Id"] = doc["id"];
                         row["BulkInsertId"] = runId;
 
