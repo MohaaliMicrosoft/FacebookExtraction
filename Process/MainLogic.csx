@@ -29,6 +29,8 @@ public class MainLogic
             string page = pageToSearch.Replace(" ", "");
             try
             {
+                var pageObj = await FacebookUtility.GetPage(page, token);
+                
                  // Get Facebook Posts
                 posts = await FacebookUtility.GetPostsAsync(page, date, token);
 
@@ -40,7 +42,7 @@ public class MainLogic
                 var reactionsDataTable =  DataTableUtility.GetReactionsDataTable();
                 var sentimentDataTable = DataTableUtility.GetSentimentDataTable();
 
-                PopulatePostCommentsAndReactions(postDataTable, commentsDataTable, reactionsDataTable, posts, runId, page);
+                PopulatePostCommentsAndReactions(postDataTable, commentsDataTable, reactionsDataTable, posts, runId, page, pageObj);
 
                 // Populate Sentiment
                 Dictionary<string, string> items = new Dictionary<string, string>();
@@ -81,7 +83,7 @@ public class MainLogic
     }
 
     public static void PopulatePostCommentsAndReactions(DataTable postsDataTable, DataTable commentsDataTable, 
-        DataTable reactionsDataTable, List<JObject> posts, string runId, string page)
+        DataTable reactionsDataTable, List<JObject> posts, string runId, string page, JObject pageObj)
     {
         foreach (var postPayload in posts)
         {
@@ -106,6 +108,8 @@ public class MainLogic
                 postRow["Total Comments"] = Utility.ConvertToLong(post["comments"]["summary"]["total_count"]);
                 postRow["Total Shares"] = DBNull.Value;
                 postRow["Page"] = page;
+                postRow["PageId"] = pageObj["id"];
+                postRow["PageDisplayName"] = pageObj["name"];
                 postRow["BulkInsertId"] = runId;
                 postsDataTable.Rows.Add(postRow);
 
@@ -129,6 +133,8 @@ public class MainLogic
                     commentRow["Post Id2"] = Utility.ConvertToLong(split[1]);
                     commentRow["Original Post Id"] = post["id"];
                     commentRow["Page"] = page;
+                    commentRow["PageId"] = pageObj["id"];
+                    commentRow["PageDisplayName"] = pageObj["name"];
                     commentsDataTable.Rows.Add(commentRow);
                 }
 
