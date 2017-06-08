@@ -24,7 +24,7 @@ public class FacebookUtility
         JObject post = null;
         string until = DateUtility.GetUnixFromDate(untilDateTime);
         string since = DateUtility.GetUnixFromDate(DateUtility.GetDateTimeRelativeFromNow(untilDateTime, -1));
-        string requestUri = $"https://graph.facebook.com/{page}/feed?access_token={accessToken}&fields=message%2Cupdated_time%2Ccreated_time%2Cstory%2Cshares%2Ccomments.limit%28100%29.summary%28true%29%2Clikes.limit%280%29.summary%28true%29%2Creactions.limit%28100%29.summary%28true%29%2Cfrom%2Cpicture&limit=25&until={until}&since={since}";
+        string requestUri = $"https://graph.facebook.com/{page}/feed?access_token={accessToken}&fields=message%2Cupdated_time%2Ccreated_time%2Cstory%2Cshares%2Ccomments.limit%28100%29.summary%28true%29%2Clikes.limit%280%29.summary%28true%29%2Creactions.limit%28100%29.summary%28true%29%2Cfrom%2Cpicture&limit=10&until={until}&since={since}";
 
         do
         {
