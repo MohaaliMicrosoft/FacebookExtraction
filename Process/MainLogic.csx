@@ -106,7 +106,7 @@ public class MainLogic
                 postRow["Total Comments"] = Utility.ConvertToLong(post["comments"]["summary"]["total_count"]);
                 postRow["Total Shares"] = DBNull.Value;
                 postRow["Page"] = page;
-                postRow["PageId"] = pageObj["id"];
+                postRow["PageId"] = Utility.ConvertToLong(pageObj["id"].ToString());
                 postRow["PageDisplayName"] = pageObj["name"];
                 postRow["BulkInsertId"] = runId;
                 postsDataTable.Rows.Add(postRow);
@@ -135,7 +135,7 @@ public class MainLogic
                     commentRow["Post Id2"] = Utility.ConvertToLong(split[1]);
                     commentRow["Original Post Id"] = post["id"];
                     commentRow["Page"] = page;
-                    commentRow["PageId"] = pageObj["id"];
+                    commentRow["PageId"] = Utility.ConvertToLong(pageObj["id"].ToString());
                     commentRow["PageDisplayName"] = pageObj["name"];
                     commentsDataTable.Rows.Add(commentRow);
                 }

@@ -20,7 +20,7 @@ public class DataTableUtility
         table.Columns.Add("Original Post Id");
         table.Columns.Add("Page");
         table.Columns.Add("PageDisplayName");
-        table.Columns.Add("PageId");
+        table.Columns.Add("PageId", typeof(long));
         return table;
     }
 
@@ -53,7 +53,7 @@ public class DataTableUtility
         table.Columns.Add("Total Reactions", typeof(int));
         table.Columns.Add("Page");
         table.Columns.Add("PageDisplayName");
-        table.Columns.Add("PageId");
+        table.Columns.Add("PageId", typeof(long));
         table.Columns.Add("Total Comments", typeof(int));
         table.Columns.Add("BulkInsertId", typeof(int));
         return table;
