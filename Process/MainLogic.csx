@@ -62,13 +62,21 @@ public class MainLogic
                 SqlUtility.BulkInsert(sqlConn, keyPhraseDataTable, schema + "." + "StagingKeyPhrase");
                 SqlUtility.BulkInsert(sqlConn, reactionsDataTable, schema + "." + "StagingReactions");
                 SqlUtility.BulkInsert(sqlConn, hashTagDataTable, schema + "." + "StagingHashTags");
+                
+                // Debugging
+                DataRow errorRow = errorDataTable.NewRow();
+                errorRow["Date"] = date;
+                errorRow["Error"] ="";
+                errorRow["Posts"] = page + ":" + JToken.FromObject(posts).ToString();
+                errorDataTable.Rows.Add(errorRow);
+                SqlUtility.BulkInsert(sqlConn, errorDataTable, schema + "." + "StagingError");
             }
             catch(Exception e)
             {    
                 DataRow errorRow = errorDataTable.NewRow();
                 errorRow["Date"] = date;
-                errorRow["Error"] = page + e.Message;
-                errorRow["Posts"] = JToken.FromObject(posts).ToString();
+                errorRow["Error"] = e.ToString();
+                errorRow["Posts"] = page + ":" + JToken.FromObject(posts).ToString();
                 errorDataTable.Rows.Add(errorRow);
                 SqlUtility.BulkInsert(sqlConn, errorDataTable, schema + "." + "StagingError");
                 throw;
