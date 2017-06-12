@@ -21,7 +21,7 @@ public class MainLogic
         string token = await FacebookUtility.GetAccessTokenAsync(client, secret);
         string runId = SqlUtility.InsertRunId(sqlConn, schema + ".[StagingInsert]");
         string[] pages = SqlUtility.GetPages(sqlConn, schema);
-        var errorDataTable = DataTableUtility.GetErrorDataTable();
+       
         List<JObject> posts = new List<JObject>();
 
         foreach(var pageToSearch in pages)
@@ -64,6 +64,7 @@ public class MainLogic
                 SqlUtility.BulkInsert(sqlConn, hashTagDataTable, schema + "." + "StagingHashTags");
                 
                 // Debugging
+                var errorDataTable = DataTableUtility.GetErrorDataTable();
                 DataRow errorRow = errorDataTable.NewRow();
                 errorRow["Date"] = date;
                 errorRow["Error"] ="";
@@ -73,6 +74,7 @@ public class MainLogic
             }
             catch(Exception e)
             {    
+                var errorDataTable = DataTableUtility.GetErrorDataTable();
                 DataRow errorRow = errorDataTable.NewRow();
                 errorRow["Date"] = date;
                 errorRow["Error"] = e.ToString();
